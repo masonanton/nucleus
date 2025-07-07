@@ -19,15 +19,16 @@ services:
     depends_on:
       - db
     environment:
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql,filesystem:/flyway/seed
       FLYWAY_URL: jdbc:mysql://db:3306/nucleus_lab?allowPublicKeyRetrieval=true&useSSL=false
       FLYWAY_USER: nucleus_user
       FLYWAY_PASSWORD: nucleus_pw
       FLYWAY_SCHEMAS: nucleus_lab
       FLYWAY_TABLE: schema_version
-      CLEAN_DISABLED: 'false'
+      FLYWAY_CLEAN_DISABLED: 'false'
     volumes:
       - ./migrations:/flyway/sql
-    command: -connectRetries=10 baseline -baselineVersion=0
+      - ./seed:/flyway/seed
 
 volumes:
   db_data:
