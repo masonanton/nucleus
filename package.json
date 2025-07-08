@@ -4,12 +4,12 @@
   "description": "Core of a nuclear fission operation. Exploring with databases.",
   "main": "index.js",
   "scripts": {
-    "db:up":     "docker-compose up -d db",
-    "db:down":   "docker-compose down",
-    "cleandb":   "docker-compose run --rm flyway clean",
-    "initdb":    "docker-compose run --rm flyway baseline -baselineVersion=0",
+    "db:up": "docker-compose up -d db",
+    "db:down": "docker-compose down",
+    "cleandb": "docker-compose run --rm flyway clean",
+    "initdb": "docker-compose run --rm flyway baseline -baselineVersion=0",
     "migratedb": "docker-compose run --rm flyway migrate",
-    "repairdb":  "docker-compose run --rm flyway repair"
+    "repairdb": "docker-compose run --rm flyway repair"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,7 @@
   "homepage": "https://github.com/masonanton/nucleus#readme",
   "dependencies": {
     "dotenv": "^17.0.1",
-    "mysql2": "^3.14.1"
-  },
-  "devDependencies": {
+    "mysql2": "^3.14.1",
     "knex": "^3.1.0"
   }
 }

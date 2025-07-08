@@ -4,11 +4,8 @@ services:
     image: mysql:8.0
     container_name: nucleus-mysql
     restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: nucleus_lab
-      MYSQL_USER: nucleus_user
-      MYSQL_PASSWORD: nucleus_pw
+    env_file:
+      - .env
     ports:
       - "3306:3306"
     volumes:
@@ -18,14 +15,17 @@ services:
     image: flyway/flyway:latest
     depends_on:
       - db
+    env_file:
+      - .env
     environment:
-      FLYWAY_LOCATIONS: filesystem:/flyway/sql,filesystem:/flyway/seed
-      FLYWAY_URL: jdbc:mysql://db:3306/nucleus_lab?allowPublicKeyRetrieval=true&useSSL=false
-      FLYWAY_USER: nucleus_user
-      FLYWAY_PASSWORD: nucleus_pw
-      FLYWAY_SCHEMAS: nucleus_lab
-      FLYWAY_TABLE: schema_version
-      FLYWAY_CLEAN_DISABLED: 'false'
+      FLYWAY_LOCATIONS:            filesystem:/flyway/sql,filesystem:/flyway/seed
+      FLYWAY_URL:                  jdbc:mysql://db:${DB_PORT}/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false
+      FLYWAY_USER:                 ${DB_USER}
+      FLYWAY_PASSWORD:             ${DB_PASS}
+      FLYWAY_SCHEMAS:              ${DB_NAME}
+      FLYWAY_TABLE:                schema_version
+      FLYWAY_CLEAN_DISABLED:       'false'
+      FLYWAY_BASELINE_ON_MIGRATE:  'true'
     volumes:
       - ./migrations:/flyway/sql
       - ./seed:/flyway/seed
