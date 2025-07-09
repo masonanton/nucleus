@@ -1,5 +1,4 @@
 # nucleus
 Core of a nuclear fission operation. Exploring with databases. 
 
-![Nucleus](https://github.com/user-attachments/assets/7ca4dde4-bec8-4474-92c5-6e74ffae9b4b)
-
+<img width="1024" alt="Screenshot 2025-07-09 at 9 53 09 AM" src="https://github.com/user-attachments/assets/897fbcb3-1257-4af4-869d-1e7f0ec6bdc4" />
